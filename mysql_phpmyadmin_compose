@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  dev-01-mysql57-01:
+    image: mysql:5.7.36
+    container_name: dev-01-mysql57-01
+    networks:
+    - dev-01-net-01
+    volumes:
+    - dev-01-mysql57-01-data:/var/lib/mysql
+    - dev-01-mysql57-01-config:/etc/mysql/conf.d
+    environment:
+    - MYSQL_ROOT_PASSWORD=dev01mysqlpwd
+
+  dev-01-phpmyadmin-01:
+    image: phpmyadmin:latest
+    container_name: dev-01-phpmyadmin-01
+    ports:
+    - 8080:80
+    networks:
+    - dev-01-net-01
+    environment:
+    - PMA_HOST=dev-01-mysql57-01
+    depends_on:
+    - dev-01-mysql57-01
+
+networks:
+  dev-01-net-01:
+    driver: bridge
+
+volumes:
+  dev-01-mysql57-01-data:
+  dev-01-mysql57-01-config:
+
