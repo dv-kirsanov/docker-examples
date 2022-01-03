@@ -10,7 +10,7 @@ services:
     - dev-01-mysql57-01-data:/var/lib/mysql
     - dev-01-mysql57-01-config:/etc/mysql/conf.d
     environment:
-    - MYSQL_ROOT_PASSWORD=dev01mysqlpwd
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
 
   dev-01-phpmyadmin-01:
     image: phpmyadmin:latest
